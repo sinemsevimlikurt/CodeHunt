@@ -9,353 +9,510 @@ export type Question = {
 export const questions: Question[] = [
   {
     id: 1,
-    question: "React nedir?",
-    options: ["Bir veritabanı", "Bir programlama dili", "Bir JavaScript kütüphanesi", "Bir tarayıcı eklentisi"],
-    answer: "Bir JavaScript kütüphanesi",
-    explanation: "React, kullanıcı arayüzleri oluşturmak için kullanılan bir JavaScript kütüphanesidir."
+    question: `Aşağıdaki React kodu çalıştırıldığında ne olur?
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>Artır</button>
+      <p>{count}</p>
+    </div>
+  );
+}`,
+    options: [
+      "Sayfa hata verir.",
+      "Butona basıldığında sayfa yenilenir.",
+      "Butona basıldıkça count artar.",
+      "useState tanımsızdır."
+    ],
+    answer: "Butona basıldıkça count artar.",
+    explanation: "useState ile tanımlanan count state'i butona her basıldığında bir artar ve bileşen yeniden render edilir."
   },
   {
     id: 2,
-    question: "JSX nedir?",
-    options: ["JavaScript'in yeni bir versiyonu", "HTML ile yazılmış bir stil dosyası", "JavaScript XML", "Veritabanı sorgu dili"],
-    answer: "JavaScript XML",
-    explanation: "JSX, JavaScript içinde HTML benzeri bir sözdizimidir ve React bileşenlerinde kullanılır."
+    question: `Bu React kodundaki hata nedir?
+
+function Greeting() {
+  const name = "Sinem";
+  return (
+    <div>
+      <h1>Merhaba, {name}</h1>
+    </div>
+  );
+}`,
+    options: [
+      "Syntax hatası var.",
+      "name değişkeni yanlış tanımlanmış.",
+      "Fonksiyon bileşenleri büyük harfle başlamalı.",
+      "Kodda hata yoktur."
+    ],
+    answer: "Kodda hata yoktur.",
+    explanation: "Fonksiyon bileşeni doğru tanımlanmış, JSX içinde JavaScript ifadeleri süslü parantez içinde doğru kullanılmıştır."
   },
   {
     id: 3,
-    question: "React bileşenleri hangi şekilde tanımlanabilir?",
-    options: ["Sadece fonksiyonlarla", "Sadece sınıflarla", "Fonksiyonlar ve sınıflarla", "Sadece HTML ile"],
-    answer: "Fonksiyonlar ve sınıflarla",
-    explanation: "React bileşenleri hem fonksiyonlarla hem de sınıf yapılarıyla tanımlanabilir."
+    question: `Aşağıdaki kod parçası neden hata verir?
+
+const App = () => {
+  const [value, setValue] = useState;
+  return <div>{value}</div>;
+}`,
+    options: [
+      "setValue yanlış kullanılmış.",
+      "useState yanlış kullanılmış.",
+      "JSX içinde hata var.",
+      "value tanımsız."
+    ],
+    answer: "useState yanlış kullanılmış.",
+    explanation: "useState çağrısı parantezle yapılmalıdır: useState(başlangıçDeğeri). Parantez eksik olduğu için hata verir."
   },
   {
     id: 4,
-    question: "State nedir?",
-    options: ["React bileşenlerinin stilidir", "Bir bileşenin iç veri durumudur", "Sunucuya gönderilen veridir", "Kullanıcının IP adresidir"],
-    answer: "Bir bileşenin iç veri durumudur",
-    explanation: "State, bileşenin zaman içindeki durumunu ve bu durumun nasıl değiştiğini temsil eder."
+    question: `Aşağıdaki kod parçası çalışır mı?
+
+function MyComponent() {
+  let count = 0;
+
+  function handleClick() {
+    count++;
+    console.log(count);
+  }
+
+  return <button onClick={handleClick}>Click</button>;
+}`,
+    options: [
+      "Evet, ancak count her zaman 1'den başlar.",
+      "Hayır, JSX hatası var.",
+      "Evet, count her tıklamada bir artar ve ekranda görünür.",
+      "Hayır, count değişkeni global tanımlanmalı."
+    ],
+    answer: "Evet, ancak count her zaman 1'den başlar.",
+    explanation: "count her render'da sıfırlanır. useState kullanılmadığı için değer her zaman 0'dan başlar."
   },
   {
     id: 5,
-    question: "Props nedir?",
-    options: ["Component'e dışarıdan aktarılan verilerdir", "Tarayıcı özellikleridir", "CSS class isimleridir", "Veritabanı bağlantı ayarlarıdır"],
-    answer: "Component'e dışarıdan aktarılan verilerdir",
-    explanation: "Props, bir bileşene dışarıdan aktarılan ve bileşenin davranışını belirleyen verilerdir."
+    question: `Aşağıdaki kod ne zaman sonsuz döngüye girer?
+
+useEffect(() => {
+  setData(fetchData());
+}, [data]);`,
+    options: [
+      "Hiçbir zaman sonsuz döngüye girmez.",
+      "data değişmediği sürece çalışmaz.",
+      "Her render'da data değişirse sonsuz döngü oluşur.",
+      "fetchData yanlış yazılmıştır."
+    ],
+    answer: "Her render'da data değişirse sonsuz döngü oluşur.",
+    explanation: "data state'i değiştiğinde useEffect tekrar çalışır, bu da tekrar setData çağrılmasına neden olur ve sonsuz döngü oluşur."
   },
   {
     id: 6,
-    question: "useState hook'u ne işe yarar?",
-    options: ["Bileşeni yeniden render eder", "Veri gönderir", "Durum (state) oluşturur ve yönetir", "Tarayıcı geçmişini yönetir"],
-    answer: "Durum (state) oluşturur ve yönetir",
-    explanation: "useState, fonksiyon bileşenlerinde durum oluşturmak ve yönetmek için kullanılır."
+    question: `Bu TypeScript kodunda hata var mı?
+
+type User = {
+  name: string;
+  age?: number;
+};
+
+const user: User = {
+  name: "Ali"
+};`,
+    options: [
+      "Evet, age zorunlu tanımlanmalı.",
+      "Hayır, çünkü age opsiyoneldir.",
+      "Evet, name eksik.",
+      "Evet, tip hatası var."
+    ],
+    answer: "Hayır, çünkü age opsiyoneldir.",
+    explanation: "age alanı '?' ile tanımlandığı için opsiyoneldir. Bu yüzden yalnızca name tanımlamak yeterlidir."
   },
   {
     id: 7,
-    question: "React'ta hangi hook, bileşen render edildiğinde çalışır?",
-    options: ["useParams", "useEffect", "useState", "useContext"],
-    answer: "useEffect",
-    explanation: "useEffect hook'u, bileşen render edildikten sonra belirli işlemleri gerçekleştirmek için kullanılır."
+    question: `Aşağıdaki kod neden bekleneni vermez?
+
+const arr = [1, 2, 3];
+const result = arr.map(async (num) => num * 2);
+console.log(result);`,
+    options: [
+      "map kullanılmaz.",
+      "async map fonksiyonu yanlış.",
+      "result bir Promise dizisidir.",
+      "Kodda hata yok."
+    ],
+    answer: "result bir Promise dizisidir.",
+    explanation: "async fonksiyonlar Promise döner. Bu nedenle map işlemi sonucunda result, sayılar yerine Promise'lerden oluşan bir dizidir."
   },
   {
     id: 8,
-    question: "React'ta key prop'u neden kullanılır?",
-    options: ["Performansı düşürmek için", "Her bileşene benzersiz kimlik vermek için", "CSS eklemek için", "Veri gönderimi için"],
-    answer: "Her bileşene benzersiz kimlik vermek için",
-    explanation: "Key prop'u, React'in hangi öğelerin değiştiğini anlaması için kullanılır ve her öğeye benzersiz bir kimlik sağlar."
+    question: `Bu React kodundaki sorun nedir?
+
+function List({ items }) {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
+  );
+}`,
+    options: [
+      "map yanlış kullanılmış.",
+      "key değeri benzersiz değilse sorun çıkar.",
+      "index kullanılmalıydı.",
+      "items hatalıdır."
+    ],
+    answer: "key değeri benzersiz değilse sorun çıkar.",
+    explanation: "React'ta key prop'u benzersiz olmalıdır. item değerleri benzersiz değilse performans sorunları veya hatalar oluşabilir."
   },
   {
     id: 9,
-    question: "Virtual DOM nedir?",
-    options: ["Tarayıcıdaki DOM'un aynısıdır", "Gerçek DOM'dur", "DOM'un hafızadaki kopyasıdır", "Veritabanıdır"],
-    answer: "DOM'un hafızadaki kopyasıdır",
-    explanation: "Virtual DOM, React'in değişiklikleri daha verimli takip edebilmesi için kullanılan DOM'un hafızadaki kopyasıdır."
+    question: `Aşağıdaki React useEffect kullanımı hakkında ne söylenebilir?
+
+useEffect(() => {
+  console.log("Component yüklendi");
+}, []);`,
+    options: [
+      "Her render'da çalışır.",
+      "Hiçbir zaman çalışmaz.",
+      "Sadece component ilk yüklendiğinde çalışır.",
+      "State değişiminde tetiklenir."
+    ],
+    answer: "Sadece component ilk yüklendiğinde çalışır.",
+    explanation: "useEffect'in dependency array'i boş olduğunda, bu effect sadece component mount edildiğinde çalışır."
   },
   {
     id: 10,
-    question: "React'ta hangi hook global veri yönetimi için en uygundur?",
-    options: ["useState", "useEffect", "useContext", "useRef"],
-    answer: "useContext",
-    explanation: "useContext, React uygulamasında global veri yönetimini kolaylaştırmak için kullanılır."
-  },
+    question: `Aşağıdaki kodda hangi sorun vardır?
 
-  {
-    id: 11,
-    question: "React bileşenleri neden küçük ve tekrar kullanılabilir olmalıdır?",
-    options: ["Daha karmaşık hale getirmek için", "Kod tekrarını artırmak için", "Bakımı kolaylaştırmak ve yeniden kullanılabilirliği sağlamak için", "Yalnızca performans için"],
-    answer: "Bakımı kolaylaştırmak ve yeniden kullanılabilirliği sağlamak için",
-    explanation: "React'ta küçük, bağımsız bileşenler kodun bakımını kolaylaştırır ve farklı yerlerde yeniden kullanılabilir."
+function App() {
+  const [name, setName] = useState("");
+
+  return (
+    <input value={name} onChange={(e) => setName(e)} />
+  );
+}`,
+    options: [
+      "useState yanlış kullanılmış.",
+      "setName fonksiyonu eksik.",
+      "onChange event'ini doğru işlemez.",
+      "JSX hatası vardır."
+    ],
+    answer: "onChange event'ini doğru işlemez.",
+    explanation: "onChange event handler içinde 'e' doğrudan setName'e verilmiş. Ancak e.target.value şeklinde alınmalıdır."
   },
   {
+  id: 11,
+  question: `Aşağıdaki kod parçasında hangi hata yapılmıştır?
+
+function Timer() {
+  const [seconds, setSeconds] = useState(0);
+
+  useEffect(() => {
+    setInterval(() => {
+      setSeconds(seconds + 1);
+    }, 1000);
+  }, []);
+
+  return <div>{seconds}</div>;
+}`,
+  options: [
+    "useState hatalı kullanılmış.",
+    "useEffect bağımlılık dizisi eksik.",
+    "seconds state'i her zaman 0 olarak kalır.",
+    "setInterval yanlış kullanılmış."
+  ],
+  answer: "seconds state'i her zaman 0 olarak kalır.",
+  explanation: "setInterval içindeki callback, ilk render'daki 'seconds' değerine bağlı kalır. Bu nedenle her saniyede 0 + 1 hesaplanır ve state her zaman 1 olur. Doğru kullanım için fonksiyonel setState (setSeconds(prev => prev + 1)) kullanılmalıdır."
+},
+{
     id: 12,
-    question: "React'ta controlled component ne demektir?",
-    options: ["Kullanıcının kontrol ettiği bileşen", "State ile kontrol edilen form bileşeni", "Sunucu tarafından kontrol edilen bileşen", "Random olarak güncellenen bileşen"],
-    answer: "State ile kontrol edilen form bileşeni",
-    explanation: "Controlled component, değerini state üzerinden alan ve React tarafından kontrol edilen form bileşenidir."
+    question: `Aşağıdaki kod ne tür bir bellek sızıntısı riski taşır?
+
+function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(setData);
+  }, []);
+
+  return <div>{data.length}</div>;
+}`,
+    options: [
+      "fetch hatalı kullanılmış.",
+      "setData yanlış yazılmış.",
+      "Component unmount edildiğinde ongoing fetch iptal edilmez.",
+      "useEffect dependency dizisi hatalı."
+    ],
+    answer: "Component unmount edildiğinde ongoing fetch iptal edilmez.",
+    explanation: "Eğer component fetch işlemi bitmeden unmount olursa, setState çağrısı bir uyarı üretir. AbortController kullanılarak fetch işlemi iptal edilmelidir."
   },
   {
     id: 13,
-    question: "React Router'da `<Route>` bileşeninin görevi nedir?",
-    options: ["Yönlendirme işlemini başlatmak", "Sayfaları yeniden yüklemek", "URL'ye göre bileşenleri render etmek", "Yalnızca veritabanına veri göndermek"],
-    answer: "URL'ye göre bileşenleri render etmek",
-    explanation: "<Route> bileşeni, belirli bir URL yoluna karşılık gelen bileşeni ekrana getirir."
+    question: `Aşağıdaki TypeScript kodu neden derleme hatası verir?
+
+type User = {
+  name: string;
+};
+
+const user: User = null;` ,
+    options: [
+      "name property eksik.",
+      "null değeri User tipine atanamaz.",
+      "type yerine interface kullanılmalı.",
+      "TS config dosyası eksik."
+    ],
+    answer: "null değeri User tipine atanamaz.",
+    explanation: "Varsayılan olarak, TypeScript'te bir değişkenin null olabilmesi için union tipi (User | null) tanımlanmalıdır. Aksi halde derleme hatası alınır."
   },
   {
     id: 14,
-    question: "React’te `useRef` ne işe yarar?",
-    options: ["Bileşeni yeniden render eder", "Form inputlarını style eder", "DOM'a doğrudan erişim sağlar", "Yeni bileşen oluşturur"],
-    answer: "DOM'a doğrudan erişim sağlar",
-    explanation: "useRef, DOM elementine doğrudan erişmek veya değişkenleri render dışında saklamak için kullanılır."
+    question: `Aşağıdaki React kodunda performans problemi nereden kaynaklanır?
+
+const List = ({ items }) => {
+  const renderedItems = items.map(item => <li>{item}</li>);
+
+  return <ul>{renderedItems}</ul>;
+};
+
+function App() {
+  const [list, setList] = useState([1, 2, 3]);
+
+  return <List items={list} />;
+}`,
+    options: [
+      "useMemo kullanılmıyor.",
+      "useEffect yanlış yerde.",
+      "items değişmiyor.",
+      "Key prop'u eksik."
+    ],
+    answer: "Key prop'u eksik.",
+    explanation: "React listeleri işlerken her öğe için 'key' prop'una ihtiyaç duyar. Aksi halde yeniden render sırasında performans düşebilir veya hatalı davranışlar görülebilir."
   },
   {
     id: 15,
-    question: "Context API ne zaman kullanılmalıdır?",
-    options: ["Sadece stil tanımlarken", "Global olarak state paylaşımı gerektiğinde", "CSS class değiştirmek için", "Veri çekme işlemi için"],
-    answer: "Global olarak state paylaşımı gerektiğinde",
-    explanation: "Context API, component ağacı boyunca prop drilling yapmadan veri paylaşımını sağlar."
+    question: `Aşağıdaki kod TypeScript ile neden tip hatası verir?
+
+const getLength = (value: string | string[]): number => {
+  return value.length;
+};` ,
+    options: [
+      "value.length her iki tipte de bulunmaz.",
+      "Fonksiyon tipi yanlış yazılmış.",
+      "Type guard eksik.",
+      "string tipi number ile toplanamaz."
+    ],
+    answer: "Type guard eksik.",
+    explanation: "string ve string[] tiplerinin her ikisi de 'length' özelliğine sahip olsa da, TypeScript birleşik türlerde doğrudan ortak olmayan özelliklere erişime izin vermez. Type guard kullanmak gerekir."
   },
-  {
+   {
     id: 16,
-    question: "React'ta `key` props neden sabit ve benzersiz olmalı?",
-    options: ["Veriyi şifrelemek için", "useEffect ile çalışmak için", "Liste elemanlarını takip etmek için", "Her bileşeni yeniden oluşturmak için"],
-    answer: "Liste elemanlarını takip etmek için",
-    explanation: "React, key sayesinde hangi elemanın değiştiğini tespit eder ve yalnızca değişen kısmı yeniden render eder."
+    question: `useEffect(() => {
+  console.log("Component mounted");
+}, [count]);
+
+Bu useEffect ne zaman çalışır?`,
+    options: [
+      "Sadece component ilk yüklendiğinde",
+      "Her render'da",
+      "Sadece count değiştiğinde",
+      "Hiçbir zaman"
+    ],
+    answer: "Sadece count değiştiğinde",
+    explanation: "Dependency array içinde sadece 'count' yer aldığı için, sadece count değeri değiştiğinde çalışır."
   },
+
   {
     id: 17,
-    question: "Bir bileşende birden fazla state varsa ne yapılmalıdır?",
-    options: ["Tek bir state nesnesine tüm veriler konur", "useState birden fazla kez kullanılabilir", "useEffect ile state güncellenir", "Sadece props ile çözülür"],
-    answer: "useState birden fazla kez kullanılabilir",
-    explanation: "React'ta bir bileşende istediğiniz kadar useState kullanabilirsiniz."
+    question: `Bir componentin re-render edilmesini engellemek için aşağıdakilerden hangisi kullanılır?`,
+    options: [
+      "useMemo",
+      "useCallback",
+      "React.memo",
+      "useEffect"
+    ],
+    answer: "React.memo",
+    explanation: "React.memo bir bileşeni sararak, props'lar değişmedikçe yeniden render edilmesini engeller."
   },
+
   {
     id: 18,
-    question: "React'ta `memo` fonksiyonu ne işe yarar?",
-    options: ["Verileri localStorage'da saklar", "Bileşenin gereksiz yere yeniden render edilmesini önler", "Form gönderimini sağlar", "Yönlendirme yapar"],
-    answer: "Bileşenin gereksiz yere yeniden render edilmesini önler",
-    explanation: "memo, props değişmediği sürece bileşeni yeniden render etmez ve performansı artırır."
+    question: `Aşağıdaki tanım ne işe yarar?
+
+const add = useCallback((a, b) => a + b, []);`,
+    options: [
+      "Fonksiyonun değişmesini engeller",
+      "Fonksiyonun içini cache'ler",
+      "Fonksiyonu her render'da yeniden oluşturur",
+      "Fonksiyon sadece ilk render'da çalışır"
+    ],
+    answer: "Fonksiyonun değişmesini engeller",
+    explanation: "useCallback, dependency array değişmediği sürece aynı fonksiyon referansını döndürür."
   },
+
   {
     id: 19,
-    question: "React'ta hangi durum `useEffect` içinde infinite loop’a sebep olur?",
-    options: ["Boş dependency array kullanmak", "Hiç dependency vermemek", "State güncellemesini dependency array’de tanımlamamak", "Dependency array’e state’i dahil etmek ve sürekli güncellemek"],
-    answer: "Dependency array’e state’i dahil etmek ve sürekli güncellemek",
-    explanation: "useEffect içinde güncellenen state dependency olarak verilirse, sürekli render tetiklenebilir."
+    question: `React’te context API hangi problem için en uygundur?`,
+    options: [
+      "DOM manipülasyonu",
+      "Veri görselleştirme",
+      "Global state paylaşımı",
+      "Routing işlemleri"
+    ],
+    answer: "Global state paylaşımı",
+    explanation: "Context API, componentler arasında prop drilling yapmadan veri paylaşmak için kullanılır."
   },
   {
     id: 20,
-    question: "React’te custom hook oluşturmanın temel faydası nedir?",
-    options: ["Veriyi cache'lemek", "Kod tekrarını azaltmak", "API ile bağlantı kurmak", "Router işlemi yapmak"],
-    answer: "Kod tekrarını azaltmak",
-    explanation: "Custom hook'lar, ortak mantıkları soyutlayarak kod tekrarını azaltır ve okunabilirliği artırır."
+    question: `React’te controlled component ne anlama gelir?`,
+    options: [
+      "Kendi durumunu yönetemeyen component",
+      "State'i DOM'dan alan component",
+      "State'i React tarafından kontrol edilen form elementi",
+      "Context kullanan component"
+    ],
+    answer: "State'i React tarafından kontrol edilen form elementi",
+    explanation: "Controlled component'lerde input'ların değeri bir state tarafından kontrol edilir."
   },
   {
-  id: 21,
-  question: "React.memo ne işe yarar?",
-  options: ["Bileşeni global yapar", "Bileşeni cache'ler", "Bileşeni yeniden render etmeyi önler", "Props'u günceller"],
-  answer: "Bileşeni yeniden render etmeyi önler",
-  explanation: "React.memo, props değişmediğinde bileşenin yeniden render edilmesini engeller."
-},
-{
-  id: 22,
-  question: "useCallback hook'u ne amaçla kullanılır?",
-  options: ["State güncellemek", "Fonksiyonu hatırlamak", "Veri fetch etmek", "Bileşeni yeniden render etmek"],
-  answer: "Fonksiyonu hatırlamak",
-  explanation: "useCallback, aynı fonksiyonu yeniden oluşturmadan hafızada tutmak için kullanılır."
-},
-{
-  id: 23,
-  question: "React'ta context nasıl oluşturulur?",
-  options: ["createContext ile", "useState ile", "useEffect ile", "createStore ile"],
-  answer: "createContext ile",
-  explanation: "createContext fonksiyonu, global veriler paylaşmak için context oluşturur."
-},
-{
-  id: 24,
-  question: "React'ta hangi hook, reducer mantığı ile state yönetir?",
-  options: ["useState", "useReducer", "useContext", "useMemo"],
-  answer: "useReducer",
-  explanation: "useReducer, Redux benzeri bir yapı sunarak karmaşık state’leri yönetmeye yardımcı olur."
-},
-{
-  id: 25,
-  question: "Props drilling nedir?",
-  options: ["Verilerin hook ile yönetilmesi", "Verilerin context ile paylaşılması", "Verilerin birçok bileşenden geçerek aktarılması", "Verilerin sadece bir bileşende tutulması"],
-  answer: "Verilerin birçok bileşenden geçerek aktarılması",
-  explanation: "Props drilling, verilerin parent’tan child’a birden fazla ara bileşenden geçerek aktarılmasıdır."
-},
-{
-  id: 26,
-  question: "Hangi hook, render sırasında DOM’a erişimi sağlar?",
-  options: ["useEffect", "useRef", "useContext", "useMemo"],
-  answer: "useRef",
-  explanation: "useRef ile DOM elemanlarına doğrudan erişim sağlanabilir."
-},
-{
-  id: 27,
-  question: "React Router'da dinamik route nasıl tanımlanır?",
-  options: ["/user", "/:userId", "user/:id", "userId/:id"],
-  answer: "/:userId",
-  explanation: "':' ile başlayan ifadeler dinamik parametre anlamına gelir."
-},
-{
-  id: 28,
-  question: "React'ta Suspense bileşeni ne işe yarar?",
-  options: ["State oluşturur", "Yönlendirme yapar", "Lazy yükleme için bekleme sağlar", "Veri gönderir"],
-  answer: "Lazy yükleme için bekleme sağlar",
-  explanation: "Suspense, lazy load edilen bileşenler yüklenene kadar fallback içerik gösterir."
-},
-{
-  id: 29,
-  question: "React hook'ları hangi tür bileşenlerde kullanılabilir?",
-  options: ["Class bileşenlerinde", "Fonksiyon bileşenlerinde", "Her yerde", "Sadece JSX içinde"],
-  answer: "Fonksiyon bileşenlerinde",
-  explanation: "Hook'lar sadece fonksiyon bileşenleri içinde kullanılabilir."
-},
-{
-  id: 30,
-  question: "Hangi yöntemle React performansı profillenebilir?",
-  options: ["React Profiler", "Chrome Extensions", "Redux DevTools", "Jest"],
-  answer: "React Profiler",
-  explanation: "React Profiler, uygulamanın render sürelerini analiz etmeye yardımcı olur."
-},
-{
-  id: 31,
-  question: "React bileşenlerinde default props nasıl tanımlanır?",
-  options: ["props.default", "defaultProps", "setProps", "initialProps"],
-  answer: "defaultProps",
-  explanation: "defaultProps, bir bileşene varsayılan prop değerleri atamak için kullanılır."
-},
-{
-  id: 32,
-  question: "React form bileşeninde input değerini nasıl alırsınız?",
-  options: ["e.target.text", "e.input.value", "e.target.value", "e.value"],
-  answer: "e.target.value",
-  explanation: "Input elemanlarındaki değer e.target.value ile alınır."
-},
-{
-  id: 33,
-  question: "React uygulamasında hata sınırları (Error Boundaries) nasıl çalışır?",
-  options: ["useEffect ile tanımlanır", "Try-catch içinde kullanılır", "Class bileşeni ile try-catch benzeri çalışır", "useError hook'u ile tanımlanır"],
-  answer: "Class bileşeni ile try-catch benzeri çalışır",
-  explanation: "Error Boundaries, yalnızca class bileşenleri kullanılarak oluşturulur ve alt bileşenlerdeki hataları yakalar."
-},
-{
-  id: 34,
-  question: "React'ta hydration nedir?",
-  options: ["Server-side rendering sonrası client tarafının devralması", "Lazy yükleme işlemi", "Veri çekme işlemi", "DOM güncellemesi"],
-  answer: "Server-side rendering sonrası client tarafının devralması",
-  explanation: "Hydration, sunucuda render edilen HTML'in client tarafında interaktif hale getirilmesidir."
-},
-{
-  id: 35,
-  question: "React bileşeninin yeniden render edilmesini önlemek için ne yapılabilir?",
-  options: ["setState kullanmak", "useMemo ile cache'lemek", "Props güncellemek", "useEffect çalıştırmak"],
-  answer: "useMemo ile cache'lemek",
-  explanation: "useMemo, hesaplanan değeri hatırlayarak bileşenin gereksiz render olmasını önler."
-},
-{
-  id: 36,
-  question: "React bileşenine veri göndermek için ne kullanılır?",
-  options: ["State", "Context", "Props", "Ref"],
-  answer: "Props",
-  explanation: "Props, bileşenler arasında veri iletimi için kullanılır."
-},
-{
-  id: 37,
-  question: "React’te hangi yapı birden fazla state güncellemesini tek işlem gibi işler?",
-  options: ["useMemo", "useReducer", "Batched updates", "Concurrent mode"],
-  answer: "Batched updates",
-  explanation: "React, birden fazla state güncellemesini tek render ile işlemek için batched updates yapar."
-},
-{
-  id: 38,
-  question: "React'ta context ile hangi hook birlikte kullanılır?",
-  options: ["useRef", "useEffect", "useContext", "useMemo"],
-  answer: "useContext",
-  explanation: "Context içerisindeki verilere erişmek için useContext hook'u kullanılır."
-},
-{
-  id: 39,
-  question: "React uygulamasında loading göstermek için ne yapılabilir?",
-  options: ["Lazy load", "useState ile isLoading durumu", "useEffect ile veri çekmek", "Tüm bileşeni gizlemek"],
-  answer: "useState ile isLoading durumu",
-  explanation: "Veri çekme gibi işlemlerde loading durumu state ile kontrol edilir."
-},
-{
-  id: 40,
-  question: "React'ta portal kullanmanın amacı nedir?",
-  options: ["Veri çekmek", "Modal gibi bileşenleri farklı DOM node’una render etmek", "State yönetmek", "Yönlendirme yapmak"],
-  answer: "Modal gibi bileşenleri farklı DOM node’una render etmek",
-  explanation: "Portals, bileşenleri parent DOM hiyerarşisi dışında render etmeye olanak tanır."
-},
-{
-  id: 41,
-  question: "React'ta Concurrent Mode’un amacı nedir?",
-  options: ["Verileri daha hızlı fetch etmek", "State’i paylaşmak", "UI’yi daha duyarlı hale getirmek", "Router yönetimi"],
-  answer: "UI’yi daha duyarlı hale getirmek",
-  explanation: "Concurrent Mode, daha akıcı kullanıcı deneyimi için iş parçacıklarını kesintili işler."
-},
-{
-  id: 42,
-  question: "useLayoutEffect ile useEffect arasındaki fark nedir?",
-  options: ["useLayoutEffect daha yavaş çalışır", "useLayoutEffect DOM boyamadan hemen önce çalışır", "useEffect DOM boyamasından önce çalışır", "İkisi aynıdır"],
-  answer: "useLayoutEffect DOM boyamadan hemen önce çalışır",
-  explanation: "useLayoutEffect, tarayıcı DOM’u boyamadan hemen önce çalışır."
-},
-{
-  id: 43,
-  question: "React bileşenleri neden küçük ve tek amaçlı olmalıdır?",
-  options: ["Performans için", "Test edilebilirlik ve yeniden kullanılabilirlik için", "Daha fazla CSS uygulanabilmesi için", "JSX kısıtlaması nedeniyle"],
-  answer: "Test edilebilirlik ve yeniden kullanılabilirlik için",
-  explanation: "Tek amaçlı küçük bileşenler daha kolay test edilir ve yeniden kullanılabilir."
-},
-{
-  id: 44,
-  question: "React’te fallback UI nedir?",
-  options: ["Veri yüklenirken gösterilen arayüz", "Uygulama yedek tasarımı", "Redux alternatifidir", "Tarayıcı temasıdır"],
-  answer: "Veri yüklenirken gösterilen arayüz",
-  explanation: "Suspense ve lazy bileşenlerde, bileşen yüklenene kadar gösterilen geçici arayüzdür."
-},
-{
-  id: 45,
-  question: "React uygulamasında TypeScript’in katkısı nedir?",
-  options: ["Verileri gizler", "Stilleri kontrol eder", "Tip güvenliği sağlar", "Server çalıştırır"],
-  answer: "Tip güvenliği sağlar",
-  explanation: "TypeScript, JavaScript'e tip güvenliği ve daha iyi geliştirme deneyimi kazandırır."
-},
-{
-  id: 46,
-  question: "React Native nedir?",
-  options: ["React için test aracı", "React'in mobil uygulama geliştirme versiyonu", "Veri görselleştirme kütüphanesi", "CSS framework"],
-  answer: "React'in mobil uygulama geliştirme versiyonu",
-  explanation: "React Native, React sözdizimiyle native mobil uygulama geliştirmenizi sağlar."
-},
-{
-  id: 47,
-  question: "React bileşeni nasıl test edilir?",
-  options: ["Sadece tarayıcıda", "CSS ile", "Jest ve React Testing Library ile", "Redux ile"],
-  answer: "Jest ve React Testing Library ile",
-  explanation: "React bileşenleri Jest ve React Testing Library kullanılarak test edilebilir."
-},
-{
-  id: 48,
-  question: "Hangi araç React state yönetimi için değildir?",
-  options: ["Redux", "MobX", "Recoil", "Axios"],
-  answer: "Axios",
-  explanation: "Axios, HTTP istekleri yapmak için kullanılır, state yönetimi yapmaz."
-},
-{
-  id: 49,
-  question: "React’te prop types tanımı hangi kütüphane ile yapılır?",
-  options: ["TypeScript", "React-Check", "PropTypes", "useProp"],
-  answer: "PropTypes",
-  explanation: "PropTypes, prop türlerini kontrol etmek için kullanılan bir kütüphanedir."
-},
-{
-  id: 50,
-  question: "React’te children nedir?",
-  options: ["Bileşenin alt bileşenleri", "Bir state", "Yalnızca bir prop", "useEffect sonucu"],
-  answer: "Bileşenin alt bileşenleri",
-  explanation: "`children` prop'u, bileşen içine yerleştirilen JSX içeriklerdir."
-}
+    id: 21,
+    question: `Virtual DOM ne işe yarar?`,
+    options: [
+      "Gerçek DOM'u kaldırır",
+      "DOM işlemlerini yavaşlatır",
+      "DOM güncellemelerini daha verimli hale getirir",
+      "Sadece class componentlerde kullanılır"
+    ],
+    answer: "DOM güncellemelerini daha verimli hale getirir",
+    explanation: "Virtual DOM, gerçek DOM'daki değişiklikleri minimize ederek performansı artırır."
+  },
+  {
+    id: 22,
+    question: `Aşağıdakilerden hangisi React Router kullanımı için doğrudur?`,
+    options: [
+      "<Router path='/home'>Home</Router>",
+      "<Route path='/home' component={Home} />",
+      "<Route to='/home' component={Home} />",
+      "<Navigate path='/home' element={<Home />} />"
+    ],
+    answer: "<Route path='/home' component={Home} />",
+    explanation: "React Router v5'te route tanımı bu şekilde yapılır. v6 ile birlikte 'element' kullanımı gelmiştir."
+  },
+  {
+    id: 23,
+    question: `Aşağıdaki kod parçası ne işe yarar?
+
+const MyComponent = React.memo(() => {
+  return <div>Memoized</div>;
+});`,
+    options: [
+      "Component'in tüm props'larını kaldırır",
+      "Component her render'da yeniden çalışır",
+      "Component sadece props değişince render edilir",
+      "Component'in DOM'a erişimini sağlar"
+    ],
+    answer: "Component sadece props değişince render edilir",
+    explanation: "React.memo, props'lar değişmediği sürece component'i yeniden render etmez."
+  },
+  {
+    id: 24,
+    question: `React'te neden key prop'u kullanılır?`,
+    options: [
+      "Component'e id vermek için",
+      "Render'ı zorlamak için",
+      "Listelerde öğeleri benzersiz şekilde tanımlamak için",
+      "Style vermek için"
+    ],
+    answer: "Listelerde öğeleri benzersiz şekilde tanımlamak için",
+    explanation: "Key prop'u, React'in hangi öğenin değiştiğini anlamasına yardımcı olur."
+  },
+  {
+    id: 25,
+    question: `Aşağıdaki JSX ifadesi ne döner?
+
+{true && <p>Merhaba</p>}`,
+    options: [
+      "Hiçbir şey",
+      "true",
+      "<p>Merhaba</p>",
+      "false"
+    ],
+    answer: "<p>Merhaba</p>",
+    explanation: "true && ifade olduğunda, ifade döner. false && olsaydı, false dönerdi."
+  },
+  {
+    id: 26,
+    question: `React'te aşağıdaki kullanım ne hata üretir?
+
+const [count, setCount] = useState();
+console.log(count + 1);`,
+    options: [
+      "Hata vermez, NaN döner",
+      "ReferenceError",
+      "count undefined olduğu için TypeError",
+      "React crash olur"
+    ],
+    answer: "Hata vermez, NaN döner",
+    explanation: "useState() çağrıldığında undefined ile başlar, undefined + 1 = NaN olur ama hata atmaz."
+  },
+  {
+    id: 27,
+    question: `Aşağıdaki JSX neden hata verir?
+
+const el = <div class="box">Hello</div>;`,
+    options: [
+      "class kullanılmaz, className olmalı",
+      "div kapatılmadığı için",
+      "'box' tanımsız olduğu için",
+      "JSX içinde div kullanılamaz"
+    ],
+    answer: "class kullanılmaz, className olmalı",
+    explanation: "JSX'te class yerine className kullanılır çünkü class JS'de reserved keyword'dür."
+  },
+  {
+    id: 28,
+    question: `Aşağıdaki useEffect sonsuz döngüye girer mi?
+
+useEffect(() => {
+  setValue(value + 1);
+}, [value]);`,
+    options: [
+      "Evet",
+      "Hayır",
+      "Sadece bir kez",
+      "Bağımlılık array'i olmadığı için hata verir"
+    ],
+    answer: "Evet",
+    explanation: "Her seferinde value güncellendiği için tekrar çalışır ve sonsuz döngüye girer."
+  },
+  {
+    id: 29,
+    question: `React'te props drilling nedir?`,
+    options: [
+      "Props'un yanlış yazılması",
+      "Props'un component'ten component'e manuel olarak iletilmesi",
+      "Props'un default olması",
+      "Props yerine context kullanılması"
+    ],
+    answer: "Props'un component'ten component'e manuel olarak iletilmesi",
+    explanation: "Props drilling, bir veriyi çok katmanlı component ağacında aktarmak anlamına gelir."
+  },
+  {
+    id: 30,
+    question: `React'te bu kod ne döner?
+
+console.log(typeof null);`,
+    options: [
+      "'object'",
+      "'null'",
+      "'undefined'",
+      "Hata verir"
+    ],
+    answer: "'object'",
+    explanation: "JavaScript'te bir bug nedeniyle typeof null === 'object' döner."
+  }
+
 ];
