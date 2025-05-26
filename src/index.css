@@ -160,4 +160,16 @@ body {
   .input {
     @apply bg-white border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700 placeholder-gray-400;
   }
+  
+  .bottom-button-container {
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 9999;
+    margin-top: 100vh;
+    padding-bottom: 20px;
+  }
 }

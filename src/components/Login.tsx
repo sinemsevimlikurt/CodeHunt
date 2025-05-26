@@ -16,8 +16,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-full mt-8">
-      <div className="text-center mb-20">
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', position: 'relative' }}>
+      <div style={{ textAlign: 'center', marginTop: '50px' }}>
         <TypewriterText 
           text="Test your coding skills and debug like a pro!" 
           speed={30} 
@@ -25,15 +25,15 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         />
       </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col items-center justify-center w-full">
-        <div className="mt-64 mb-8 flex flex-col items-center justify-center w-full">
-          <div className="mb-2 text-center">
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <div style={{ marginTop: '30px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ marginBottom: '10px', textAlign: 'center' }}>
             <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2 biorhyme-regular">
               Username:
             </label>
           </div>
           
-          <div className="mt-4">
+          <div style={{ marginTop: '15px' }}>
             <input
               type="text"
               id="username"
@@ -46,7 +46,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           </div>
         </div>
 
-        <div className="mt-[32rem] flex items-center justify-center w-full">
+        <div style={{ position: 'absolute', bottom: '20px', width: '100%', textAlign: 'center' }}>
           <button
             type="submit"
             style={{
@@ -58,11 +58,9 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
               border: 'none',
               boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
               transition: 'all 0.3s ease',
-              marginTop: '120px',
               fontSize: '16px',
               fontWeight: 'bold',
-              display: 'block',
-              margin: '0 auto'
+              display: 'inline-block'
             }}
             disabled={!username.trim()}
           >

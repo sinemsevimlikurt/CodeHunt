@@ -10,21 +10,19 @@ interface GameHeaderProps {
 
 const GameHeader: React.FC<GameHeaderProps> = ({ username, score, timeLeft, onTimeUp }) => {
   return (
-    <div className="game-header mb-6">
-      <h1 className="text-3xl font-bold mb-4">CodeHunt</h1>
-      <p className="biorhyme-regular mb-2">Debug and learn!</p>
-      
-      <div className="flex flex-wrap justify-between items-center mt-4">
+    <div className="game-header mb-4">
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
-          <p className="biorhyme-regular">Playing as {username}</p>
+          <h1 className="text-3xl font-bold mb-2">CodeHunt</h1>
+          <p className="biorhyme-regular mb-1">Debug and learn!</p>
+          <p className="biorhyme-regular mt-2">Playing as {username}</p>
         </div>
         
-        <div>
-          <p className="biorhyme-regular">Score: {score}</p>
-        </div>
-        
-        <div className="w-full md:w-auto mt-2 md:mt-0">
-          <Timer initialTime={timeLeft} onTimeUp={onTimeUp} />
+        <div className="flex flex-col items-end" style={{ minWidth: '150px', padding: '5px' }}>
+          <p className="biorhyme-regular mb-2" style={{ fontWeight: 'bold', fontSize: '18px' }}>💯 Score: {score}</p>
+          <div>
+            <Timer initialTime={timeLeft} onTimeUp={onTimeUp} />
+          </div>
         </div>
       </div>
     </div>

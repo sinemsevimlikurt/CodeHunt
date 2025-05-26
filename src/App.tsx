@@ -165,27 +165,11 @@ function App() {
           selectedAnswer={selectedAnswer} 
           isAnswered={isAnswered} 
           handleAnswerSelect={handleAnswerSelect} 
-          checkAnswer={checkAnswer} 
+          checkAnswer={checkAnswer}
+          nextQuestion={nextQuestion}
         />
         
-        {/* Next question button */}
-        {isAnswered && (
-          <div className="mt-6 flex justify-end">
-            <button
-              onClick={nextQuestion}
-              className="biorhyme-regular px-8 py-4 rounded-xl transition-colors duration-300"
-              style={{
-                backgroundColor: '#60a5fa',
-                color: 'white',
-                border: 'none',
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
-                cursor: 'pointer'
-              }}
-            >
-              Next Question
-            </button>
-          </div>
-        )}
+        {/* Next question button is now in the QuestionCard component */}
       </div>
     </div>
   );
