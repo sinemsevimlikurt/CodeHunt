@@ -27,11 +27,11 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
   nextQuestion
 }) => {
   return (
-    <div className="bg-white rounded-lg shadow-lg p-2 pt-0 mb-4" style={{ maxHeight: 'calc(100vh - 70px)', display: 'flex', flexDirection: 'column', overflow: 'visible' }}>
+    <div className="bg-white rounded-lg shadow-lg p-2 pt-0 mb-4" style={{ maxHeight: 'calc(100vh - 70px)', display: 'flex', flexDirection: 'column', overflow: 'visible', position: 'relative' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '5px' }}>
         <div>
           <h2 className="text-xl font-bold mb-0">Question {question.id}</h2>
-          <p className="text-sm">10 points</p>
+          <p className="text-base font-semibold">{question.points} points</p>
         </div>
       </div>
       
@@ -85,7 +85,7 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
 
       {/* Always show explanation when answered, regardless of correct/incorrect */}
       {isAnswered && (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', marginTop: '-15px', marginBottom: '10px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '100%', marginTop: '-20px', marginBottom: '10px' }}>
           <h3 className="font-bold mb-1 text-base" style={{ color: selectedAnswer === question.answer ? '#166534' : '#991b1b', marginLeft: '10px' }}>{selectedAnswer === question.answer ? '✓ Correct!' : '✗ Incorrect!'}</h3>
           <div className={`explanation-box p-2 border-2 rounded-lg ${selectedAnswer === question.answer ? 'correct' : 'incorrect'}`} style={{
             borderColor: selectedAnswer === question.answer ? '#22c55e' : '#ef4444',
@@ -126,14 +126,14 @@ const QuestionCard: React.FC<QuestionCardProps> = ({
         </div>
       )}
       
-      {/* Next Question button when answered - positioned directly below explanation */}
+      {/* Next Question button when answered - positioned at the bottom right of the card */}
       {isAnswered && (
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-5px', marginBottom: '15px', position: 'relative', zIndex: 100 }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px', marginBottom: '10px', position: 'absolute', bottom: '10px', right: '20px', zIndex: 100 }}>
           <button
             onClick={nextQuestion}
             className="biorhyme-regular px-5 py-3 rounded-xl transition-colors duration-300"
             style={{
-              backgroundColor: '#3b82f6',
+              backgroundColor: '#8b5cf6', /* Purple color */
               color: 'white',
               cursor: 'pointer',
               border: 'none',

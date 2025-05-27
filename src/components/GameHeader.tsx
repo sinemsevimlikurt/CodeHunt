@@ -13,7 +13,7 @@ const GameHeader: React.FC<GameHeaderProps> = ({ username, score, timeLeft, onTi
     <div className="game-header mb-4">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
-          <h1 className="text-3xl font-bold mb-2">CodeHunt</h1>
+          <h1 className="text-3xl font-bold mb-2" style={{ color: '#003366' }}>CodeHunt</h1>
           <p className="biorhyme-regular mb-1">Debug and learn!</p>
           <p className="biorhyme-regular mt-2">Playing as {username}</p>
         </div>

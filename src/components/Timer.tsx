@@ -48,7 +48,7 @@ const Timer: React.FC<TimerProps> = ({ initialTime, onTimeUp }) => {
             }}
           ></div>
         </div>
-        <span className="biorhyme-regular text-lg font-medium">⌛ {formatTime(timeLeft)}</span>
+        <span className="biorhyme-regular text-lg font-medium">⏱️ {formatTime(timeLeft)}</span>
       </div>
     </div>
   );
